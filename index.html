@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danism Altaverse - IT ALL BEGINS WITH AN IMAGINATION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #c74dbd;
+            --deep-purple: #6b2d87;
+            --dark-bg: #0a0514;
+            --darker-bg: #050208;
+            --text-light: #e8d5f0;
+            --accent-pink: #ff6ec7;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--dark-bg);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1a0b2e 100%);
+        }
+
+        .background-animation::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(199, 77, 189, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            top: -250px;
+            right: -250px;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .background-animation::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(107, 45, 135, 0.12) 0%, transparent 70%);
+            border-radius: 50%;
+            bottom: -200px;
+            left: -200px;
+            animation: float 15s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(100px, 100px) scale(1.1); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 5, 20, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(199, 77, 189, 0.2);
+        }
+
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-nav img {
+            width: 50px;
+            height: 50px;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-purple);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-logo {
+            width: 250px;
+            height: 250px;
+            margin-bottom: 2rem;
+            animation: pulse 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(199, 77, 189, 0.5));
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(199, 77, 189, 0.5)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 50px rgba(199, 77, 189, 0.8)); }
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            color: var(--primary-purple);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 1rem;
+            animation: slideInDown 1s ease-out;
+        }
+
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-tagline {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.2rem);
+            color: var(--accent-pink);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2rem;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-description {
+            max-width: 800px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--primary-purple), var(--deep-purple));
+            color: white;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(199, 77, 189, 0.4);
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(199, 77, 189, 0.6);
+            background: linear-gradient(135deg, var(--accent-pink), var(--primary-purple));
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 5%;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 900;
+            color: var(--primary-purple);
+            text-align: center;
+            margin-bottom: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(199, 77, 189, 0.05);
+            border: 2px solid rgba(199, 77, 189, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(199, 77, 189, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-purple);
+            box-shadow: 0 20px 40px rgba(199, 77, 189, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary-purple);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 5%;
+            background: rgba(199, 77, 189, 0.03);
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+        }
+
+        .mission-box {
+            background: linear-gradient(135deg, rgba(199, 77, 189, 0.1), rgba(107, 45, 135, 0.1));
+            border: 2px solid var(--primary-purple);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 3rem;
+        }
+
+        .mission-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 5%;
+            text-align: center;
+        }
+
+        .contact-info {
+            max-width: 600px;
+            margin: 3rem auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            color: var(--primary-purple);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-pink);
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(199, 77, 189, 0.2);
+            background: var(--darker-bg);
+        }
+
+        footer p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-purple);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                right: -100%;
+                background: rgba(10, 5, 20, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                width: 100%;
+                padding: 2rem;
+                transition: right 0.4s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <nav>
+        <div class="logo-nav">
+            <img src="https://avatars.githubusercontent.com/u/258265337?v=4" alt="Danism Altaverse Logo">
+            <span class="logo-text">Danism Altaverse</span>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+
+    <section class="hero" id="home">
+        <img src="https://avatars.githubusercontent.com/u/258265337?v=4" alt="Danism Altaverse" class="hero-logo">
+        <h1>Danism Altaverse</h1>
+        <p class="hero-tagline">IT ALL BEGINS WITH AN IMAGINATION</p>
+        <p class="hero-description">
+            Pioneering cutting-edge technological solutions that transform the digital landscape. 
+            Specializing in software development, web design, and intranet development to create 
+            immersive and interactive digital platforms that empower businesses and individuals 
+            to thrive in a connected world.
+        </p>
+        <a href="#contact" class="cta-button">Let's Build Together</a>
+    </section>
+
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-icon">💻</span>
+                <h3>Software Development</h3>
+                <p>Building robust, scalable applications tailored to unique business needs. From concept to deployment, creating solutions that drive efficiency and innovation.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🌐</span>
+                <h3>Web Design & Development</h3>
+                <p>Crafting beautiful, responsive digital experiences that captivate users. Interactive web applications that combine aesthetics with functionality.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🔐</span>
+                <h3>Intranet Solutions</h3>
+                <p>Developing secure internal platforms for seamless collaboration and productivity. Custom intranet systems that enhance organizational communication.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🤖</span>
+                <h3>AI Integration</h3>
+                <p>Implementing intelligent systems that drive efficiency and unlock new possibilities. Leveraging artificial intelligence to transform business operations.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">⚡</span>
+                <h3>Custom Solutions</h3>
+                <p>Tailored technological innovations designed specifically for your challenges. Scalable web applications with advanced integrations.</p>
+            </div>
+            <div class="service-card">
+                <span class="service-icon">🎯</span>
+                <h3>Digital Strategy</h3>
+                <p>Strategic consulting to help navigate the digital landscape. From planning to execution, guiding transformation journeys.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <h2 class="section-title">About Danism Altaverse</h2>
+        <div class="about-content">
+            <p>
+                Danism Altaverse is committed to pioneering cutting-edge technological solutions 
+                that transform the digital landscape. The core focus lies in Information and 
+                Communication Technology (ICT), with specialization in software development, 
+                web design, and intranet development.
+            </p>
+            <p>
+                Through innovation, Danism Altaverse creates immersive and interactive digital 
+                platforms that empower businesses and individuals to thrive in a connected world. 
+                With a strong emphasis on building scalable web applications and custom software 
+                solutions, the company integrates advanced technologies such as artificial 
+                intelligence to deliver unparalleled user experiences.
+            </p>
+            <div class="mission-box">
+                <h3>Our Mission</h3>
+                <p>
+                    To empower businesses and individuals through innovative technology solutions 
+                    that bridge the gap between imagination and reality in the digital world.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-info">
+            <p>
+                Danism Altaverse is always open to collaborations, especially with individuals 
+                or teams excited about web innovations and creating impactful digital experiences. 
+                Let's connect and bring exciting ideas to life!
+            </p>
+            <div class="social-links">
+                <a href="https://instagram.com/danism.altaverse" target="_blank" title="Instagram">📷</a>
+                <a href="https://github.com/danisms" target="_blank" title="GitHub">💻</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Danism Altaverse. All rights reserved.</p>
+        <p>Building the future, one line of code at a time.</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
